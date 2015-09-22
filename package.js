@@ -13,7 +13,11 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
 
-  api.addFiles('meteor-running-admin.js');
+  api.use('urigo:angular@0.9.3', 'client');
+  // api.use('mongo@1.1.0', ['client', 'server']);
+  api.use('simonv3:meteor-running-models', ['client', 'server']);
+
+  api.addFiles('meteor-running-admin.js', ['client']);
 
   var clientFiles = [
     'client/js/admin/controllers/adminCtrl.ng.js',
@@ -22,6 +26,7 @@ Package.onUse(function(api) {
     'client/js/admin/views/setup.ng.html',
     'client/js/lib/routes.js',
   ];
+
   api.addFiles(clientFiles, 'client');
 
 });

@@ -32,7 +32,7 @@ angular.module('meteor-running-admin').config([
                   $meteor.subscribe('users')
                 ])
                 .then(function() {
-                  var site = $meteor.collection(Sites, false)[0]
+                  var site = $meteor.collection(Sites, false)[0];
                   var numOfAdmin = $meteor.object(Counts ,'numberOfAdmin', false);
 
                   if (numOfAdmin.count !== 0 && site.has_been_set_up === true) {

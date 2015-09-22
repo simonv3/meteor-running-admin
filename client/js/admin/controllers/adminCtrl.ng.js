@@ -9,11 +9,13 @@ angular.module('meteor-running-admin').controller('AdminCtrl',
     $scope.$meteorSubscribe('sites'),
     $scope.$meteorSubscribe('groups'),
     ]).then(function(data){
+      console.log(window);
+
       $scope.users = $meteor.collection(Meteor.users);
       $scope.site = $meteor.collection(Sites)[0];
       $scope.groups = $meteor.collection(Groups);
     }, function(error) {
-      console.log(error);
+      console.log("errored", error);
     });
 
   $scope.exportData = function() {
