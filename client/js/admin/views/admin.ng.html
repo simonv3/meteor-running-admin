@@ -1,0 +1,32 @@
+<h1>Admin</h1>
+
+<p>
+  Welcome to the admin panel! Here you can do basic admin things.
+</p>
+
+<h2>Users</h2>
+<table>
+  <tr ng-repeat="user in users">
+    <td>{{ user }}</td>
+  </tr>
+</table>
+
+<h2>Groups</h2>
+<table>
+  <tr ng-repeat="group in groups">
+    <td>{{ group }}</td>
+  </tr>
+</table>
+
+<h2>Site</h2>
+{{ site }}
+
+<small><a ng-click="exportData()" title="export all responses"><i class="icon-export"></i> Download CSV</a></small>.
+<small>
+  <a ng-click="sendTestEmail()" title="Send test email">Send test email</a>.
+</small>
+<small>
+  Reset:
+  <a ng-click="resetUsers()" title="Reset Users">Users</a>,
+  <a ng-click="clearResults()" title="Clear Results">Responses</a>
+</small>
