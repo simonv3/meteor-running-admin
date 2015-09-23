@@ -5,6 +5,7 @@ angular.module('meteor-running-admin').controller('SetupCtrl',
     vm.newAdmin = {};
 
     vm.createAdmin = function() {
+      vm.newAdmin.is_admin = true;
       $meteor.createUser(vm.newAdmin).then(
         function () {
           $rootScope.currentUser.is_admin = true;
@@ -13,9 +14,8 @@ angular.module('meteor-running-admin').controller('SetupCtrl',
           $scope.user.save();
           $state.go('admin');
         },
-
         function (err) {
-          vm.error = 'Registration error - ' + err;
+          vm.error = err;
         }
       );
     };
