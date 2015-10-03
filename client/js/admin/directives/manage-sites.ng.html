@@ -1,0 +1,13 @@
+<h2>Site</h2>
+<table>
+  <thead>
+    <th>Site name</th>
+    <th>Has been set up?</th>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{ site.name }}</td>
+    <td><i ng-class="{'icon-check': site.has_been_set_up, 'icon-cross':!site.has_been_set_up}"></i></td>
+  </tr>
+  </tbody>
+</table>

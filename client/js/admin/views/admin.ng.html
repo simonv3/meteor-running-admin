@@ -4,22 +4,11 @@
   Welcome to the admin panel! Here you can do basic admin things.
 </p>
 
-<h2>Users</h2>
-<table>
-  <tr ng-repeat="user in users">
-    <td>{{ user }}</td>
-  </tr>
-</table>
+<div manage-users="users"></div>
 
-<h2>Groups</h2>
-<table>
-  <tr ng-repeat="group in groups">
-    <td>{{ group }}</td>
-  </tr>
-</table>
+<div manage-groups="groups"></div>
 
-<h2>Site</h2>
-<div>{{ site }}</div>
+<div manage-sites="site"></div>
 
 <small><a ng-click="exportData()" title="export all responses"><i class="icon-export"></i> Download CSV</a></small>.
 <small>

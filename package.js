@@ -1,6 +1,6 @@
 Package.describe({
   name: 'simonv3:meteor-running-admin',
-  version: '0.0.2',
+  version: '0.0.3',
   // Brief, one-line summary of the package.
   summary: 'The admin package for Meteor Running',
   // URL to the Git repository containing the source code for this package.
@@ -20,6 +20,14 @@ Package.onUse(function(api) {
   api.addFiles('meteor-running-admin.js', ['client']);
 
   var clientFiles = [
+    'client/js/admin/directives/add-group.ng.js',
+    'client/js/admin/directives/add-group.ng.html',
+    'client/js/admin/directives/manage-users.ng.js',
+    'client/js/admin/directives/manage-users.ng.html',
+    'client/js/admin/directives/manage-sites.ng.js',
+    'client/js/admin/directives/manage-sites.ng.html',
+    'client/js/admin/directives/manage-groups.ng.js',
+    'client/js/admin/directives/manage-groups.ng.html',
     'client/js/admin/controllers/adminCtrl.ng.js',
     'client/js/admin/controllers/setupCtrl.ng.js',
     'client/js/admin/views/admin.ng.html',

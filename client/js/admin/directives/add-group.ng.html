@@ -1,0 +1,16 @@
+<a ng-click="toggleAddGroup()">Add Group <i class="icon-chevron-down"></i> </a>
+<form ng-show="showAddGroupForm" name="addGroupForm">
+  <h1>Create a group:</h1>
+  <div class="form-align-group">
+    <label for="new-group-name">Name: </label>
+    <input type="text" required ng-model="newGroup.name"/>
+  </div>
+
+  <div class="form-align-group">
+    <button ng-click="addGroup(newGroup)" ng-disabled="addGroupForm.$invalid">Create Group
+    </button>
+    <a class="cancel" ng-click="toggleAddGroup()">
+      <i class="icon-cross"></i>Cancel
+    </a>
+  </div>
+</form>

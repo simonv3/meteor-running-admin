@@ -1,0 +1,17 @@
+<h2>Groups</h2>
+<table ng-if="groups.length > 0">
+  <thead>
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="group in groups">
+      <td>{{ group.name }}</td>
+      <td><i class="icon-trash"></i></td>
+    </tr>
+  </tbody>
+</table>
+<div class="add-group admin-add">
+  <span add-group groups="groups"></span>
+</div>
