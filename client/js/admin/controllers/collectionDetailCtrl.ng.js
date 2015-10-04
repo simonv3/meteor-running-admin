@@ -10,16 +10,33 @@ angular.module('meteor-running-admin').controller('CollectionDetailCtrl',
       $scope.viewingCollection = $meteor.collection(window[$scope.collection]);
       $scope.collectionProperties = [];
 
+      for (var property in $scope.viewingCollection[0]) {
+        if ($scope.viewingCollection[0].hasOwnProperty(property)) {
+          $scope.collectionProperties.push(property);
+        }
+      }
+
       // We need to organize each possible collection.
       // Check that a nested thing has an id. If it does, just reference that.
 
       // This can be enhanced with a schema?
 
-      for (var property in $scope.viewingCollection[0]) {
-        console.log(property);
-        if ($scope.viewingCollection[0].hasOwnProperty(property)) {
-          $scope.collectionProperties.push(property);
-        }
-      }
+      $scope.transformedCollection = [];
+
+      $scope.viewingCollection.forEach(function(object, idx) {
+        tempObj = {};
+        $scope.collectionProperties.forEach(function(property) {
+          if (object[property]) {
+            if (object[property].hasOwnProperty('_id')) {
+              tempObj[property] = object[property]._id;
+            } else if (Array.isArray(object[property])) {
+              tempObj[property] = object[property].length;
+            } else {
+              tempObj[property] = object[property];
+            }
+          }
+        });
+        $scope.transformedCollection.push(tempObj);
+      });
     });
 });
