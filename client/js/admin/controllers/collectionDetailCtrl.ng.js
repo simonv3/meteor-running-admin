@@ -16,6 +16,12 @@ angular.module('meteor-running-admin').controller('CollectionDetailCtrl',
         }
       }
 
+      $scope.collectionProperties.sort(function(one, two) {
+        if (one === '_id') return true;
+        if (two === '_id') return true;
+        return false;
+      });
+
       // We need to organize each possible collection.
       // Check that a nested thing has an id. If it does, just reference that.
 
