@@ -7,9 +7,13 @@
   </thead>
   <tbody>
   <tr ng-repeat="user in users">
-    <td>{{ user.username }}</td>
-    <td>{{ user.emails[0].address }}<i ng-class="{'icon-check': user.emails[0].verified}"></i></td>
-    <td><i class="icon-trash"></i></td>
+    <td>
+      {{ user.username }}</td>
+    <td>
+      {{ user.emails[0].address }} (<i ng-class="{'icon-check': user.emails[0].verified}"></i>)</td>
+    <td>
+      <a ng-click="deleteUser($index)"><i class="icon-trash"></i></a>
+    </td>
   </tr>
   </tbody>
 </table>

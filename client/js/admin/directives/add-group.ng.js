@@ -13,6 +13,7 @@ angular.module('meteor-running-admin')
           };
           $scope.addGroup = function(group) {
             $scope.groups.push(group);
+            $scope.toggleAddGroup();
           };
         },
         templateUrl: 'simonv3_meteor-running-admin_client/js/admin/directives/add-group.ng.html',

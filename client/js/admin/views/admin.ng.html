@@ -10,6 +10,26 @@
 
 <div manage-sites="site"></div>
 
+<div class="collections">
+  <h2>Collections</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Collection</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="collection in collections">
+    <td>{{ collection.collection }}</td>
+    <td>
+      <a href="/admin/{{ collection.collection }}"><i class="icon-arrow-right"></i></a>
+    </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
 <small><a ng-click="exportData()" title="export all responses"><i class="icon-export"></i> Download CSV</a></small>.
 <small>
   <a ng-click="sendTestEmail()" title="Send test email">Send test email</a>.

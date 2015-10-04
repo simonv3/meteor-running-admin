@@ -1,0 +1,17 @@
+<div>
+  <h1>Viewing {{ collection }}</h1>
+  <table>
+    <thead>
+      <tr>
+        <th ng-repeat="property in collectionProperties">
+          {{ property }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="object in viewingCollection">
+        <td ng-repeat="property in collectionProperties">{{ object[property] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -9,9 +9,27 @@ angular.module('meteor-running-admin').controller('AdminCtrl',
     $scope.$meteorSubscribe('sites'),
     $scope.$meteorSubscribe('groups'),
     ]).then(function(data){
+      $scope.collections = [];
       $scope.users = $meteor.collection(Meteor.users);
       $scope.site = $meteor.collection(Sites)[0];
       $scope.groups = $meteor.collection(Groups);
+
+      for (var property in window) {
+        if (window.hasOwnProperty(property)) {
+          // console.log(window[property]);
+          if (window[property] && window[property].hasOwnProperty('_collection')) {
+            // Ignore the Meteor-Running models
+            if (property !== 'Groups' &&
+                property !== 'Counts' &&
+                property !== 'Sites') {
+              $scope.collections.push({
+                collection: property,
+                name: window[property]._name
+              });
+            }
+          }
+        }
+      }
     }, function(error) {
       console.log("errored", error);
     });

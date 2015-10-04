@@ -3,12 +3,17 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="group in groups">
       <td>{{ group.name }}</td>
-      <td><i class="icon-trash"></i></td>
+      <td>
+        <a ng-click="deleteGroup($index)">
+          <i class="icon-trash"></i>
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>

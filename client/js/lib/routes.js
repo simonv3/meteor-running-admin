@@ -10,7 +10,20 @@ angular.module('meteor-running-admin').config([
         templateUrl: 'simonv3_meteor-running-admin_client/js/admin/views/admin.ng.html',
         controller: 'AdminCtrl',
         resolve: {
-          'currentUser': ["$meteor", function($meteor){
+          'currentUser': ['$meteor', function($meteor){
+            return $meteor.requireValidUser(function(user) {
+              if (user.is_admin) return true;
+              return 'UNAUTHORIZED';
+            });
+          }]
+        }
+      })
+      .state('collectionDetail', {
+        url: '/admin/:collection',
+        templateUrl: 'simonv3_meteor-running-admin_client/js/admin/views/collection-detail.ng.html',
+        controller: 'CollectionDetailCtrl',
+        resolve: {
+          'currentUser': ['$meteor', function($meteor) {
             return $meteor.requireValidUser(function(user) {
               if (user.is_admin) return true;
               return 'UNAUTHORIZED';
