@@ -1,6 +1,6 @@
 Package.describe({
   name: 'simonv3:meteor-running-admin',
-  version: '0.1.0',
+  version: '0.2.0',
   // Brief, one-line summary of the package.
   summary: 'The admin package for Meteor Running',
   // URL to the Git repository containing the source code for this package.
