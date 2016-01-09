@@ -3,6 +3,7 @@ angular.module('meteor-running-admin').controller('SetupCtrl',
   function ($scope, $meteor, $state, $rootScope) {
     var vm = this;
     vm.newAdmin = {};
+    console.log('loaded set up ctrl');
 
     vm.createAdmin = function() {
       vm.newAdmin.is_admin = true;
@@ -13,6 +14,8 @@ angular.module('meteor-running-admin').controller('SetupCtrl',
           $scope.user.is_admin = true;
           $scope.user.save();
           $state.go('admin');
+          Sites.update(Sites.find({}).fetch()[0]._id, {$set: {has_been_set_up: true}})
+
         },
         function (err) {
           vm.error = err;

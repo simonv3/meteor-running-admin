@@ -1,6 +1,6 @@
 Package.describe({
   name: 'simonv3:meteor-running-admin',
-  version: '0.2.3',
+  version: '0.2.4',
   // Brief, one-line summary of the package.
   summary: 'The admin package for Meteor Running',
   // URL to the Git repository containing the source code for this package.
@@ -13,7 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
 
-  api.use('angular@1.0.1', 'client');
+  api.use('angular@1.3.1', 'client');
 
   api.use('simonv3:meteor-running-models@0.0.2', ['client', 'server']);
 
@@ -21,19 +21,19 @@ Package.onUse(function(api) {
 
   var clientFiles = [
     'client/js/admin/directives/add-group.ng.js',
-    'client/js/admin/directives/add-group.ng.html',
+    'client/js/admin/directives/add-group.html',
     'client/js/admin/directives/manage-users.ng.js',
-    'client/js/admin/directives/manage-users.ng.html',
+    'client/js/admin/directives/manage-users.html',
     'client/js/admin/directives/manage-sites.ng.js',
-    'client/js/admin/directives/manage-sites.ng.html',
+    'client/js/admin/directives/manage-sites.html',
     'client/js/admin/directives/manage-groups.ng.js',
-    'client/js/admin/directives/manage-groups.ng.html',
-    'client/js/admin/controllers/adminCtrl.ng.js',
-    'client/js/admin/controllers/setupCtrl.ng.js',
-    'client/js/admin/controllers/collectionDetailCtrl.ng.js',
-    'client/js/admin/views/admin.ng.html',
-    'client/js/admin/views/setup.ng.html',
-    'client/js/admin/views/collection-detail.ng.html',
+    'client/js/admin/directives/manage-groups.html',
+    'client/js/admin/controllers/adminCtrl.js',
+    'client/js/admin/controllers/setupCtrl.js',
+    'client/js/admin/controllers/collectionDetailCtrl.js',
+    'client/js/admin/views/admin.html',
+    'client/js/admin/views/setup.html',
+    'client/js/admin/views/collection-detail.html',
     'client/js/lib/routes.js',
   ];
 

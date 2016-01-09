@@ -14,6 +14,6 @@ angular.module('meteor-running-admin')
             }
           };
         },
-        templateUrl: 'simonv3_meteor-running-admin_client/js/admin/directives/manage-groups.ng.html',
+        templateUrl: '/packages/simonv3:meteor-running-admin/client/js/admin/directives/manage-groups.html',
       };
   });

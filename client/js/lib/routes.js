@@ -7,7 +7,7 @@ angular.module('meteor-running-admin').config([
     $stateProvider
       .state('admin', {
         url: '/admin',
-        templateUrl: 'simonv3_meteor-running-admin_client/js/admin/views/admin.ng.html',
+        templateUrl: '/packages/simonv3:meteor-running-admin/client/js/admin/views/admin.html',
         controller: 'AdminCtrl',
         resolve: {
           'currentUser': ['$meteor', function($meteor){
@@ -20,7 +20,7 @@ angular.module('meteor-running-admin').config([
       })
       .state('collectionDetail', {
         url: '/admin/:collection',
-        templateUrl: 'simonv3_meteor-running-admin_client/js/admin/views/collection-detail.ng.html',
+        templateUrl: '/packages/simonv3:meteor-running-admin/client/js/admin/views/collection-detail.html',
         controller: 'CollectionDetailCtrl',
         resolve: {
           'currentUser': ['$meteor', function($meteor) {
@@ -33,11 +33,12 @@ angular.module('meteor-running-admin').config([
       })
       .state('setup', {
         url: '/setup',
-        templateUrl: 'simonv3_meteor-running-admin_client/js/admin/views/setup.ng.html',
+        templateUrl: '/packages/simonv3:meteor-running-admin/client/js/admin/views/setup.html',
         controller: 'SetupCtrl',
         controllerAs: 'sc',
         resolve: {
           'checkAdmin': ['$meteor', '$state', '$q', '$rootScope',
+
             function($meteor, $state, $q, $rootScope) {
               return $q(function(resolve, reject) {
                 $q.all([
@@ -53,6 +54,7 @@ angular.module('meteor-running-admin').config([
                   } else if (numOfAdmin.count !== 0) {
                     reject('UNAUTHORIZED');
                   } else {
+                    console.log('Going to setup...')
                     resolve();
                   }
                 });
@@ -62,4 +64,24 @@ angular.module('meteor-running-admin').config([
       });
 
     $urlRouterProvider.otherwise("/");
-  }]);
+  }])
+  .run(function($rootScope, $q, $state) {
+    console.log('Seeing if the site needs to be set up...')
+
+    var users = Meteor.users.find({is_admin: true}).fetch()
+    if (users.length === 0) {
+      // There isn't an admin user.
+      $state.go('setup')
+    } else {
+      var sites = Sites.find({has_been_set_up: true}).fetch()
+
+      if (sites.length > 0) {
+        var site = sites[0];
+        if (site.has_been_set_up === undefined &&
+          !$rootScope.currentUser &&
+          !$rootScope.loggingIn) {
+          $state.go('setup');
+        }
+      }
+    }
+  });
