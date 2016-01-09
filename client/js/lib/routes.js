@@ -40,24 +40,16 @@ angular.module('meteor-running-admin').config([
           'checkAdmin': ['$meteor', '$state', '$q', '$rootScope',
 
             function($meteor, $state, $q, $rootScope) {
-              return $q(function(resolve, reject) {
-                $q.all([
-                  $meteor.subscribe('sites'),
-                  $meteor.subscribe('users')
-                ])
-                .then(function() {
-                  var site = $meteor.collection(Sites, false)[0];
-                  var numOfAdmin = $meteor.object(Counts ,'numberOfAdmin', false);
 
-                  if (numOfAdmin.count !== 0 && site.has_been_set_up === true) {
-                    reject('SET_UP_COMPLETE');
-                  } else if (numOfAdmin.count !== 0) {
-                    reject('UNAUTHORIZED');
-                  } else {
-                    console.log('Going to setup...')
-                    resolve();
-                  }
-                });
+              return $q(function(resolve, reject) {
+
+                Meteor.call('isSetUp', function(err, isSetUp){
+                  console.log('ran is set up', isSetUp)
+                  if (isSetUp) reject('SET_UP_COMPLETE')
+
+                  console.log('Continueing to setup...')
+                  resolve()
+                })
               });
           }]
         }
@@ -68,20 +60,7 @@ angular.module('meteor-running-admin').config([
   .run(function($rootScope, $q, $state) {
     console.log('Seeing if the site needs to be set up...')
 
-    var users = Meteor.users.find({is_admin: true}).fetch()
-    if (users.length === 0) {
-      // There isn't an admin user.
-      $state.go('setup')
-    } else {
-      var sites = Sites.find({has_been_set_up: true}).fetch()
-
-      if (sites.length > 0) {
-        var site = sites[0];
-        if (site.has_been_set_up === undefined &&
-          !$rootScope.currentUser &&
-          !$rootScope.loggingIn) {
-          $state.go('setup');
-        }
-      }
-    }
+    Meteor.call('isSetUp', function(err, resp) {
+      if (!resp) $state.go('setup')
+    })
   });
