@@ -37,18 +37,19 @@ angular.module('meteor-running-admin').config([
         controller: 'SetupCtrl',
         controllerAs: 'sc',
         resolve: {
-          'checkAdmin': ['$meteor', '$state', '$q', '$rootScope',
+          'checkAdmin': ['$meteor', '$state', '$q', '$rootScope', '$auth',
 
-            function($meteor, $state, $q, $rootScope) {
+            function($meteor, $state, $q, $rootScope, $auth) {
 
               return $q(function(resolve, reject) {
+                $auth.waitForUser().then(function() {
+                  Meteor.call('isSetUp', function(err, isSetUp){
+                    console.log('ran is set up', isSetUp)
+                    if (isSetUp) reject('SET_UP_COMPLETE')
 
-                Meteor.call('isSetUp', function(err, isSetUp){
-                  console.log('ran is set up', isSetUp)
-                  if (isSetUp) reject('SET_UP_COMPLETE')
-
-                  console.log('Continueing to setup...')
-                  resolve()
+                    console.log('Continueing to setup...')
+                    resolve()
+                  })
                 })
               });
           }]
@@ -57,10 +58,12 @@ angular.module('meteor-running-admin').config([
 
     $urlRouterProvider.otherwise("/");
   }])
-  .run(function($rootScope, $q, $state) {
+  .run(['$state', '$auth', function($state, $auth) {
     console.log('Seeing if the site needs to be set up...')
 
-    Meteor.call('isSetUp', function(err, resp) {
-      if (!resp) $state.go('setup')
+    $auth.waitForUser().then(function() {
+      Meteor.call('isSetUp', function(err, resp) {
+        if (!resp) $state.go('setup')
+      })
     })
-  });
+  }]);

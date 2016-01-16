@@ -1,6 +1,6 @@
 Package.describe({
   name: 'simonv3:meteor-running-admin',
-  version: '0.4.0',
+  version: '0.4.3',
   // Brief, one-line summary of the package.
   summary: 'The admin package for Meteor Running',
   // URL to the Git repository containing the source code for this package.
@@ -14,6 +14,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
 
   api.use('angular@1.3.1', 'client');
+  api.use('angular-meteor-auth@0.0.2', 'client');
 
   api.use('simonv3:meteor-running-models@0.0.2', ['client', 'server']);
 
